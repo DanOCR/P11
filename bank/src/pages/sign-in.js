@@ -1,114 +1,106 @@
 import { useState, useEffect } from "react";
-import {useSelector, useDispatch} from "react-redux"
-import { useNavigate } from "react-router-dom"
-import {login, reset} from "../features/auth/authSlice"
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { login, reset } from "../features/auth/authSlice";
+import {toast} from "react-toastify";
 import "../pages/Home.css";
-import { loginUser } from "../store/userSlice";
 
-
-export default function Login () {
-
-// states
-const [email, setEmail] = useState("");
-const [password, setPassword] = useState("");
-
-// Redux state
-
-const {loading, error} = useSelector((state) => state.user);
-const dispatch = useDispatch();
-const navigate = useNavigate;
-
-const handleLoginEvent = (e) => {
-  e.preventDefault();
-  let userCredentials = {
-    email, password
-  }
-  dispatch(loginUser(userCredentials)).then((result) => {
-    if(result.payload) {
-      setEmail("");
-      setPassword("");
-      navigate("/");
-    }
-  })
-}
-
-
-  // const [formData, setFormData] = useState ( {
-  //   email: "",
-  //   password: "",
-  // })
-
-  // const {email, password} = formData
-
-  // const navigate = useNavigate()
-  //   const dispatch = useDispatch()
-
-  //   const {user, isLoading, isError, isSuccess, message} = 
-  //   useSelector((state) => state.auth)
-
-  //   useEffect(() => {
-  //     if(isSuccess || user) {
-  //         navigate("/")
-  //     }
-  //     dispatch(reset())
-      
-  // }, [user, isLoading, isError, isSuccess, message, navigate, dispatch])
-
-  // const onChange = (e) => {
-  //   setFormData((prevState) => ({
-  //     ...prevState,
-  //     [e.target.name]: e.target.value,
-  //   }))
-  // }
-
-  // const onSubmit = (e) => {
-  //   e.preventDefault()
-
-  //   const userData = {
-  //     email,
-  //     password
-  //   }
-
-  //   dispatch(login(userData))
-  // }
-
-
+export default function Login() {
   
-  return (
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+  })
+  const [remember, setRemember] = useState(false);
+
+  const { email, password } = formData;
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const { user, isLoading, isError, isSuccess, message } = useSelector(
+    (state) => state.auth
+  );
+
+  useEffect(() => {
+    const customId = "custom-id-yes";
+
+    if (isError) {
+      toast.error(message);
+    }
+
+    if (isSuccess || user) {
+      toast.success(message, {
+        toastId: customId,
+      });
+      // dispatch(getProfile());
+      navigate("/user");
+    }
+
+    dispatch(reset());
+  }, [user, isError, isSuccess, message, navigate, dispatch]);
+
+  const onChange = (e) => {
+    setFormData((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+
+    const userData = {
+      email,
+      password,
+    };
+
+    dispatch(login(userData));
+  };
+
+return (
     <body>
-      <main class="main bg-dark">
-        <section class="sign-in-content">
-          <i class="fa fa-user-circle sign-in-icon"></i>
+      <main className="main bg-dark">
+        <section className="sign-in-content">
+          <i className="fa fa-user-circle sign-in-icon"></i>
           <h1>Sign In</h1>
-          <form id="form" name="form" method="get" 
-          onSubmit={handleLoginEvent}>
-            <div class="input-wrapper">
-              <label for="username"> E-mail </label>
-              <input type="email" id="username" value={email}
-              onChange={(e) => setEmail(e.target.value)}/>
-            </div>
-            <div class="input-wrapper">
-              <label for="password">Password</label>
-              <input type="password" id="password" value={password}
-              onChange={(e) => setPassword(e.target.value)}/>
-            </div>
-            <div class="input-remember">
-              <input type="checkbox" id="remember-me" />
-              <label for="remember-me"> Remember me</label>
-            </div>
 
-            {/* <a href="./user.html" class="sign-in-button">Sign In</a> */}
-
-            <button id="button" class="sign-in-button" type="submit" value="connexion">
-              {loading ? "Loading" : "Sign In"}
-            </button>
-            {error && (
-              <div role="alert"> {error} </div>
-            )}
+          <form onSubmit={onSubmit}>
+            <div className="input-wrapper">
+              <input
+                type="email"
+                id='form-email'
+                name="email"
+                value={email}
+                onChange={onChange}
+                required
+              />
+              <label htmlFor="form-email">Username</label>
+            </div>
+            <div className="input-wrapper">
+              <input
+                type='password'
+                id='form-password'
+                name='password'
+                value={password}
+                onChange={onChange}
+                required
+              />
+              <label htmlFor="form-password">Password</label>
+            </div>
+            <div className="input-remember">
+              <input
+                type="checkbox"
+                id="form-checkbox"
+                name="rememberMe"
+                onChange={() => setRemember(!remember)}
+                checked={remember}
+              />
+              <label htmlFor="form-checkbox">Remember me</label>
+            </div>
+            <button className="sign-in-button button"> {isLoading ? "Loading" : "Sign In"} </button>
           </form>
         </section>
       </main>
     </body>
-    
-  );
-}
+  )};

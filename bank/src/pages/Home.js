@@ -3,36 +3,12 @@ import Chat from "../images/icon-chat.png";
 import Secure from "../images/icon-security.png";
 import Money from "../images/icon-money.png";
 import Feature from "../components/Feature";
-import { useState } from "react";
 
-function getUser() {
-  let user = localStorage.getItem("user");
-  if (user) {
-    user = JSON.parse(user);
-  }
-  else {
-    user = null;
-  }
-  return user;
-}
 
 
 export default function Home() {
 
-  const [user, setUser] = useState(getUser());
-
-  const handleLogout = () => {
-    localStorage.removeItem("user");
-    setUser(null);
-  }
   return (
-    <>
-    {user ? (
-      <>
-      <h4> Hello, {user.password} </h4>
-      <button onClick={handleLogout} ></button>
-      </>
-    ) :
     <body>
       <main>
         <div class="hero">
@@ -52,8 +28,5 @@ export default function Home() {
         </section>
       </main>
     </body>
-}
-</>
-    
   );
 }

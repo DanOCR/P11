@@ -1,10 +1,14 @@
 import "../pages/Home.css";
 import Account from "../components/Account";
+import { useSelector } from "react-redux/es/hooks/useSelector";
+
 
 export default function User() 
 
 {
-  
+
+
+  const  user  = useSelector((state) => state.auth.user); 
 
   function toggleModal() {
     const modalContainer = document.querySelector(".modal-container");
@@ -15,30 +19,29 @@ export default function User()
 
   return (
     <body>
-      <main class="main bg-dark">
-        <div class="header">
+      <main className="main bg-dark">
+        <div className="header">
           <h1>
-            Welcome back
+            {"Welcome back" + user} 
             <br />
-            Tony Jarvis!
           </h1>
-          <button class="edit-button modal-btn modal-trigger" onClick={toggleModal}> Edit Name </button>
-          <div class="modal-container" >
+          <button className="edit-button modal-btn modal-trigger" onClick={toggleModal}> Edit Name </button>
+          <div className="modal-container" >
             {/* <div class="overlay modal-trigger"></div> */}
-            <div class="modal">
+            <div className="modal">
             
             
             <form id="form" action="/user" method="GET">
             
-            <div class="input-wrapper">
+            <div className="input-wrapper">
               <label for="username">Username</label>
               <input type="text" id="username" />
             </div>
-            <div class="input-wrapper">
+            <div className="input-wrapper">
               <label for="password">First name</label>
               <input type="password" id="password" />
             </div>
-            <div class="input-wrapper">
+            <div className="input-wrapper">
               <label for="password">Last name</label>
               <input type="password" id="mdp" />
             </div>
@@ -47,9 +50,9 @@ export default function User()
             
           
               
-              <div class="div-buttons">
-              <button class="edit-button" onClick={toggleModal}> Save </button>
-              <button class="edit-button close-modal modal-trigger" onClick={toggleModal}> Cancel </button>
+              <div className="div-buttons">
+              <button className="edit-button" onClick={toggleModal}> Save </button>
+              <button className="edit-button close-modal modal-trigger" onClick={toggleModal}> Cancel </button>
               </div>
               </form>
             </div> 
@@ -64,5 +67,5 @@ export default function User()
     </body>
     
   )
-  ;
+  
 }
