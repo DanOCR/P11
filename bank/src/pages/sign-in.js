@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { login, reset } from "../features/auth/authSlice";
 import {toast} from "react-toastify";
 import "../pages/Home.css";
+import { profile } from "../features/auth/userSlice";
 
 export default function Login() {
   
@@ -33,7 +34,7 @@ export default function Login() {
       toast.success(message, {
         toastId: customId,
       });
-      // dispatch(getProfile());
+      dispatch(profile());
       navigate("/user");
     }
 

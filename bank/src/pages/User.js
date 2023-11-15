@@ -8,7 +8,12 @@ export default function User()
 {
 
 
-  const  user  = useSelector((state) => state.auth.user); 
+  const  username  = useSelector((state) => state.user.userName.body.userName);
+  const  firstname  = useSelector((state) => state.user.userName.body.firstName);
+  const  name  = useSelector((state) => state.user.userName.body.lastName);
+
+  
+    // dispatch(editPost(postData))
 
   function toggleModal() {
     const modalContainer = document.querySelector(".modal-container");
@@ -22,7 +27,7 @@ export default function User()
       <main className="main bg-dark">
         <div className="header">
           <h1>
-            {"Welcome back" + user} 
+            {"Welcome back " + username} 
             <br />
           </h1>
           <button className="edit-button modal-btn modal-trigger" onClick={toggleModal}> Edit Name </button>
@@ -31,19 +36,20 @@ export default function User()
             <div className="modal">
             
             
-            <form id="form" action="/user" method="GET">
+            <form id="form" action="/user" method="GET" >
             
             <div className="input-wrapper">
-              <label for="username">Username</label>
-              <input type="text" id="username" />
+              <label htmlFor="username">Username</label>
+              <input type="text" id="username" placeholder={username} />
+            </div>
+
+            <div className="input-wrapper">
+              <label htmlFor="password">First name</label>
+              <input type="password" id="password" placeholder={firstname}/>
             </div>
             <div className="input-wrapper">
-              <label for="password">First name</label>
-              <input type="password" id="password" />
-            </div>
-            <div className="input-wrapper">
-              <label for="password">Last name</label>
-              <input type="password" id="mdp" />
+              <label htmlFor="password">Last name</label>
+              <input type="password" id="mdp" placeholder={name}/>
             </div>
       
   
@@ -58,14 +64,13 @@ export default function User()
             </div> 
           </div>
         </div>
-        <h2 class="sr-only">Accounts</h2>
+        <h2 className="sr-only">Accounts</h2>
         <Account></Account>
         <Account></Account>
         <Account></Account>
 
       </main>
     </body>
-    
   )
   
 }

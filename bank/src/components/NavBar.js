@@ -6,7 +6,9 @@ import { logout, reset } from "../features/auth/authSlice.js";
 import { profile } from "../features/auth/userSlice.js";
 
 export default function NavBar() {
-   const  user  = useSelector((state) => state.auth.user);
+  const  user  = useSelector((state) => state.user
+  // .userName.body.userName
+  ); 
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -29,7 +31,9 @@ export default function NavBar() {
       <div>
       {user ?
         <>
-        <button className="btn"  onClick={onProfile} > Profile </button>
+        <button className="btn"  onClick={onProfile} > Login
+        {user} 
+        </button>
         <button className="btn"  onClick={onLogout} > Logout </button>
         </>
        :
