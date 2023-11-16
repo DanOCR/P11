@@ -3,7 +3,9 @@ import userService from "./userService"
 
 // Get username from localStorage
 
-const userData = JSON.parse(localStorage.getItem("user")) ? JSON.parse(localStorage.getItem("user")) : "";
+const userData = JSON.parse(localStorage.getItem("username"))
+  ? JSON.parse(localStorage.getItem("username"))
+  : "";
 const firstName = userData.firstName;
 const lastName = userData.lastName;
 const userName = userData.userName;

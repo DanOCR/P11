@@ -3,12 +3,10 @@ import "../pages/Home.js";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logout, reset } from "../features/auth/authSlice.js";
-import { profile } from "../features/auth/userSlice.js";
+// import { profile } from "../features/auth/userSlice.js";
 
 export default function NavBar() {
-  const  user  = useSelector((state) => state.user
-  // .userName.body.userName
-  ); 
+  const  {user}  = useSelector((state) => state.user); 
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -19,7 +17,7 @@ export default function NavBar() {
   };
   const onProfile = () => {
     navigate("/user");
-    dispatch(profile());
+    // dispatch(profile());
   } 
 
   return (
@@ -31,9 +29,8 @@ export default function NavBar() {
       <div>
       {user ?
         <>
-        <button className="btn"  onClick={onProfile} > Login
-        {user} 
-        </button>
+        <button className="btn" to="/user" onClick={onProfile}> Profile </button>
+        
         <button className="btn"  onClick={onLogout} > Logout </button>
         </>
        :

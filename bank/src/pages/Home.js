@@ -21,7 +21,7 @@ export default function Home() {
           </section>
         </div>
         <section className="features">
-          <h2 className="sr-only">Features</h2>
+          <h2 className ="sr-only">Features</h2>
           <Feature src={Chat} />
           <Feature src={Secure} />
           <Feature src={Money} />
