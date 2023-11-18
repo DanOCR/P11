@@ -1,21 +1,20 @@
-import './App.css';
-import { BrowserRouter, Routes, Route} from "react-router-dom";
-import Home from './pages/Home';
-import Sign from './pages/sign-in'
-import User from './pages/User';
-import NavBar from './components/NavBar';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Profile from "./pages/Profile";
+import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 
 function App() {
   return (
     <BrowserRouter>
-      <NavBar></NavBar>
+      <NavBar />
       <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/sign-it" element={<Sign />} />
-      <Route path="/user" element={<User />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
-      <Footer></Footer>
+      <Footer />
     </BrowserRouter>
   );
 }

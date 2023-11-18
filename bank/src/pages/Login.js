@@ -2,16 +2,15 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { login, reset } from "../features/auth/authSlice";
-import {toast} from "react-toastify";
-import "../pages/Home.css";
+import { toast } from "react-toastify";
+import "../index.css";
 import { profile } from "../features/auth/userSlice";
 
 export default function Login() {
-  
   const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-  })
+    email: "",
+    password: "",
+  });
   const [remember, setRemember] = useState(false);
 
   const { email, password } = formData;
@@ -35,7 +34,7 @@ export default function Login() {
         toastId: customId,
       });
       dispatch(profile());
-      navigate("/user");
+      navigate("/profile");
     }
 
     dispatch(reset());
@@ -59,7 +58,7 @@ export default function Login() {
     dispatch(login(userData));
   };
 
-return (
+  return (
     <body>
       <main className="main bg-dark">
         <section className="sign-in-content">
@@ -70,7 +69,7 @@ return (
             <div className="input-wrapper">
               <input
                 type="email"
-                id='form-email'
+                id="form-email"
                 name="email"
                 value={email}
                 onChange={onChange}
@@ -80,9 +79,9 @@ return (
             </div>
             <div className="input-wrapper">
               <input
-                type='password'
-                id='form-password'
-                name='password'
+                type="password"
+                id="form-password"
+                name="password"
                 value={password}
                 onChange={onChange}
                 required
@@ -99,9 +98,13 @@ return (
               />
               <label htmlFor="form-checkbox">Remember me</label>
             </div>
-            <button className="sign-in-button button"> {isLoading ? "Loading" : "Sign In"} </button>
+            <button className="sign-in-button button">
+              {" "}
+              {isLoading ? "Loading" : "Sign In"}{" "}
+            </button>
           </form>
         </section>
       </main>
     </body>
-  )};
+  );
+}
