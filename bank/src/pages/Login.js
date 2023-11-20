@@ -27,6 +27,9 @@ export default function Login() {
 
     if (isError) {
       toast.error(message);
+      const input = document.getElementById("form-email");
+      input.setCustomValidity("Incorrect email or password");
+      input.reportValidity();
     }
 
     if (isSuccess || user) {
@@ -64,8 +67,7 @@ export default function Login() {
         <section className="sign-in-content">
           <i className="fa fa-user-circle sign-in-icon"></i>
           <h1>Sign In</h1>
-
-          <form onSubmit={onSubmit}>
+          <form onSubmit={onSubmit} noValidate>
             <div className="input-wrapper">
               <input
                 type="email"
@@ -75,7 +77,7 @@ export default function Login() {
                 onChange={onChange}
                 required
               />
-              <label htmlFor="form-email">Username</label>
+              <label htmlFor="form-email">Email</label>
             </div>
             <div className="input-wrapper">
               <input
@@ -103,6 +105,45 @@ export default function Login() {
               {isLoading ? "Loading" : "Sign In"}{" "}
             </button>
           </form>
+
+          {/* <form onSubmit={onSubmit}>
+            <div className="input-wrapper">
+              <input
+                type="email"
+                id="form-email"
+                name="email"
+                value={email}
+                onChange={onChange}
+                required
+              />
+              <label htmlFor="form-email">Email</label>
+            </div>
+            <div className="input-wrapper">
+              <input
+                type="password"
+                id="form-password"
+                name="password"
+                value={password}
+                onChange={onChange}
+                required
+              />
+              <label htmlFor="form-password">Password</label>
+            </div>
+            <div className="input-remember">
+              <input
+                type="checkbox"
+                id="form-checkbox"
+                name="rememberMe"
+                onChange={() => setRemember(!remember)}
+                checked={remember}
+              />
+              <label htmlFor="form-checkbox">Remember me</label>
+            </div>
+            <button className="sign-in-button button">
+              {" "}
+              {isLoading ? "Loading" : "Sign In"}{" "}
+            </button>
+          </form> */}
         </section>
       </main>
     </body>
